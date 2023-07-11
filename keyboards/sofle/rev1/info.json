@@ -1,8 +1,8 @@
 {
     "keyboard_name": "Sofle",
-    "manufacturer": "JosefAdamcik",
+    "manufacturer": "boranseckin",
     "url": "https://github.com/josefadamcik/SofleKeyboard",
-    "maintainer": "Josef Adamcik <josef.adamcik@gmail.com>",
+    "maintainer": "Boran Seckin <boran@boranseckin.com>",
     "usb": {
         "vid": "0xFC32",
         "pid": "0x0287",
