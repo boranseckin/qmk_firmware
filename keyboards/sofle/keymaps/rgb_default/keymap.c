@@ -32,6 +32,7 @@ enum custom_keycodes {
     KC_MUTE_MIC
 };
 
+// 0: MacOS, 1 : Windows
 static bool platform = 0;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -156,8 +157,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_SWTCH:
             if (record->event.pressed) {
                 platform = !platform;
+                // Swap Option and GUI
+                process_magic(AG_TOGG, record);
             }
-            process_magic(AG_TOGG, record);
             break;
 
         case KC_MUTE_MIC:
@@ -178,12 +180,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(platform ? KC_WH_U : KC_WH_D);
             }
+            break;
 
-            // do not process default functionality
-            return false;
+        case KC_WH_U:
+            if (record->event.pressed) {
+                register_code(platform ? KC_WH_D : KC_WH_U);
+            } else {
+                unregister_code(platform ? KC_WH_D : KC_WH_U);
+            }
+            break;
+
+        default:
+            return true;
     }
 
-    return true;
+    // do not process default functionality
+    return false;
 }
 
 #ifdef ENCODER_ENABLE
