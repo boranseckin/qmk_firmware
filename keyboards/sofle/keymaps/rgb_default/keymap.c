@@ -204,12 +204,12 @@ static int8_t ticks = 0;
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (platform ? !clockwise : clockwise) { ++ticks; } else { --ticks; };
-    if (abs(ticks) >= 5) {
-        tap_code(clockwise ? KC_VOLD : KC_VOLU);
+    if (abs(ticks) >= 2) {
+        tap_code(clockwise ? KC_VOLU : KC_VOLD);
         ticks = 0;
     }
 
-    return true;
+    return false;
 }
 
 #endif
